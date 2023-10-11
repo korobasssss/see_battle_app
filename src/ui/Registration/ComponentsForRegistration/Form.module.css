@@ -1,0 +1,13 @@
+.main {
+    display: grid;
+    grid-template-rows: 2fr 2fr 1fr;
+    row-gap: 10%;
+}
+
+.registration {
+    width: 35%;
+    height: 35%;
+
+    display: grid;
+}
+

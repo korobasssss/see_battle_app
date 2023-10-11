@@ -1,0 +1,11 @@
+.App {
+  height: 100vh;
+}
+
+.main {
+  height: 100%;
+
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}

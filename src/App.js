@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import app from './App.module.css';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import SetNameAndChooseGame from "./ui/Registration/ComponentsForRegistration/SetNameAndChooseGame";
+import ChooseOpponent from "./ui/Registration/ComponentsForRegistration/ChooseOpponent";
+import ArrangementShips from "./ui/Registration/ArrangementShips/ArrangementShips";
+import Game from "./ui/Game/Game";
 
-function App() {
+const App = (props) => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <div className={app.App}>
+          <main className={app.main}> {/* регистрационная часть*/}
+            <Routes>
+              <Route path="/*" element={<SetNameAndChooseGame /* player={props.state.player} game={props.state.game} setName={setName}*/ />}/>
+              <Route path="/chooseOpponent" element={<ChooseOpponent /*game={props.state.game}*/ />}/>
+              <Route path="/arrangement" element={<ArrangementShips /*player={props.state.player}
+                                                                    field1={getField}
+                                                                    field2={props.state.opponent.field}*/ />}/>
+              <Route path="/game" element={<Game /*state={props.state}*/ />}/>
+            </Routes>
+          </main>
+        </div>
+      </Router>
+
   );
 }
 
