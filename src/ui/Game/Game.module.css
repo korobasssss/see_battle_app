@@ -11,12 +11,16 @@
 
 .fields {
     width: 90%;
-    height: 50%;
+    height: 70%;
     display: grid;
     justify-self: center;
     align-self: center;
     grid-template-columns: 30% 30%;
     column-gap: 40%;
+}
+
+.fieldsAndMessages {
+
 }
 
 .fieldDecs {

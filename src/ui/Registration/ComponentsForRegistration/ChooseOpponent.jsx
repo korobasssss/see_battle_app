@@ -3,6 +3,7 @@ import form from "./Form.module.css"
 import reg from "../Registration.module.css";
 import {NavLink} from "react-router-dom";
 import Header from "../../Header/Header";
+import Navigation from "../../Navigation/Navigation";
 
 let secondPlayerInput = true;
 
@@ -10,15 +11,30 @@ let secondPlayerInput = true;
 const ChooseOpponent = (props) => {
 
     const setOpponent = (event) => {
-        {console.log(props)}
         if (event.target.selectedIndex === 0) {
-            props.game.TYPE = "II"
+            props.setGameOpp(event.target.value)
+            secondPlayerInput = true
         } else if (event.target.selectedIndex === 1) {
-            props.game.TYPE = "SECOND_PLAYER"
+            props.setGameOpp(event.target.value)
             secondPlayerInput = false;
         }
-        console.log(props.game)
-        console.log(props.game.TYPE === "SECOND_PLAYER")
+
+        props.update()
+    }
+
+    const setName = (event) => {
+        console.log(props.getOppName())
+        props.setOppName(event.target.value)
+    }
+
+    let checkName = (e) => {
+        if (props.getGameOpp() === "SECOND_PLAYER") {
+            if (props.getGameOpp() === "" || props.getGameOpp() === undefined) {
+                console.log("im here")
+                e.preventDefault()
+            }
+        }
+
     }
 
     return (
@@ -32,17 +48,20 @@ const ChooseOpponent = (props) => {
                     <section>
                         <legend>ВЫБЕРИТЕ ПРОТИВНИКА</legend>
                         <select onChange={setOpponent}>
-                            <option value="ii">Искусственный интеллект</option>
-                            <option value="twoPlayers">Второй игрок</option>
+                            <option value="II">Искусственный интеллект</option>
+                            <option value="SECOND_PLAYER">Второй игрок</option>
                         </select>
                     </section>
                     <section className="twoPlayers">
                         <legend>ВВЕДИТЕ ИМЯ ВТОРОГО ИГРОКА</legend>
-                        <input type="text" disabled={secondPlayerInput}/>
+                        <input type="text" disabled={secondPlayerInput} onChange={setName} value={props.getOppName()}/>
                     </section>
-                    <NavLink to={"/arrangement"} className={reg.buttonNext}>ДАЛЕЕ</NavLink>
+                    <NavLink to={"/arrangement"} onClick={checkName} className={reg.buttonNext}>ДАЛЕЕ</NavLink>
                 </section>
 
+                <nav>
+                    <Navigation/>
+                </nav>
             </section>
         </section>
 

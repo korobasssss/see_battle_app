@@ -4,26 +4,61 @@ import SetNameAndChooseGame from "./ui/Registration/ComponentsForRegistration/Se
 import ChooseOpponent from "./ui/Registration/ComponentsForRegistration/ChooseOpponent";
 import ArrangementShips from "./ui/Registration/ArrangementShips/ArrangementShips";
 import Game from "./ui/Game/Game";
+import {
+    arrangePlayer,
+    attack,
+    attackII,
+    checkTurn,
+    getGameTypeOpponent, getGameTypeShoot,
+    getNotTurnField, getOpponentName, getPlayerName,
+    getTurnField,
+    repeatRandomPlacement,
+    rerender, setGameTypeOpponent, setGameTypeShoot,
+    setOpponentName,
+    setPlayerName,
+    startGame, statusGame,
+    textMessagesForGame, whoseWin
+} from "./state";
+import Rules from "./ui/Navigation/Rules/Rules";
 
 const App = (props) => {
 
-  return (
-      <Router>
-        <div className={app.App}>
-          <main className={app.main}> {/* регистрационная часть*/}
-            <Routes>
-              <Route path="/*" element={<SetNameAndChooseGame /* player={props.state.player} game={props.state.game} setName={setName}*/ />}/>
-              <Route path="/chooseOpponent" element={<ChooseOpponent /*game={props.state.game}*/ />}/>
-              <Route path="/arrangement" element={<ArrangementShips /*player={props.state.player}
-                                                                    field1={getField}
-                                                                    field2={props.state.opponent.field}*/ />}/>
-              <Route path="/game" element={<Game /*state={props.state}*/ />}/>
-            </Routes>
-          </main>
-        </div>
-      </Router>
-
-  );
+    return (
+        <Router>
+            <div className={app.App}>
+                <main className={app.main}>
+                    <Routes>
+                        <Route path="/*" element={<SetNameAndChooseGame  setPlayerName={setPlayerName}
+                                                               getPlayerName={getPlayerName}
+                                                               getGameType={getGameTypeShoot}
+                                                               setGameType={setGameTypeShoot}/>}/>
+                        <Route path="/chooseOpponent" element={<ChooseOpponent setGameOpp={setGameTypeOpponent}
+                                                                     getGameOpp={getGameTypeOpponent}
+                                                                     update={rerender}
+                                                                     setOppName={setOpponentName}
+                                                                     getOppName={getOpponentName}/>}/>
+                        <Route path="/arrangement" element={<ArrangementShips gameOpponent={getGameTypeOpponent}
+                                                                    arrange={arrangePlayer}
+                                                                    turnField={getTurnField}
+                                                                    checkTurn={checkTurn}
+                                                                    update={rerender}
+                                                                    repeate={repeatRandomPlacement}
+                                                                    getTurnName={textMessagesForGame.nameWhoseTurn}/>}/>
+                        <Route path="/game" element={<Game    startGame={startGame}
+                                                    attack={attack}
+                                                    attackII={attackII}
+                                                    textMessage={textMessagesForGame}
+                                                    turnField={getTurnField}
+                                                    opponentField={getNotTurnField}
+                                                    status={statusGame}
+                                                    whoseWin={whoseWin}/>}/>
+                        <Route path="/rules" element={<Rules/>}/>
+                        <Route path="/statistics" element={<Statistics/>}/>
+                    </Routes>
+                </main>
+            </div>
+        </Router>
+    );
 }
 
 export default App;

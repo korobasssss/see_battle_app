@@ -1,0 +1,9 @@
+.rulesAndStatistics {
+    display: grid;
+    justify-items: left;
+}
+
+.startAndExit {
+    display: grid;
+    justify-items: right;
+}
