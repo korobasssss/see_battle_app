@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Header/Header";
 import game from "./Game.module.css"
 import Navigation from "../Navigation/Navigation";
+import GameNavigation from "../Navigation/GameNavigation";
 
 const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
 
@@ -47,11 +48,11 @@ const Game = (props) => {
                 </section>
                 <p>{textComments()}</p>
             </section>
-
             <nav>
-                <Navigation/>
+                <Navigation gameComp={<GameNavigation newGame={props.newGame}/>}/>
             </nav>
         </section>
+
     )
 }
 

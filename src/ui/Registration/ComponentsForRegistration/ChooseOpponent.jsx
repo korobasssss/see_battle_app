@@ -58,7 +58,6 @@ const ChooseOpponent = (props) => {
                     </section>
                     <NavLink to={"/arrangement"} onClick={checkName} className={reg.buttonNext}>ДАЛЕЕ</NavLink>
                 </section>
-
                 <nav>
                     <Navigation/>
                 </nav>

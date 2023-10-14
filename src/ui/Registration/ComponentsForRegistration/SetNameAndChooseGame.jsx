@@ -50,7 +50,6 @@ const SetNameAndChooseGame = (props) => {
                     </section>
                     <NavLink to={"/chooseOpponent"} onClick={checkName} className={reg.buttonNext} disabled={true}>ДАЛЕЕ</NavLink>
                 </section>
-
                 <nav>
                     <Navigation/>
                 </nav>

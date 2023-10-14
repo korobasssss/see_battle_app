@@ -3,7 +3,6 @@ import Coordinate from "./elements/coordinate";
 import Field from "./elements/field/field";
 
 let setVariations = () => {
-    console.log("hello")
     let arr = []
     for (let row = 0; row < Field.SIZE; row++) {
         for (let col = 0; col < Field.SIZE; col++) {
@@ -16,6 +15,8 @@ let setVariations = () => {
 let arrVariantAttack = setVariations()
 
 export let getCoordinate = () => {
+    console.log("2, get a coordinate")
+    // console.log("ii take coord")
     let rndIndex = RandomPlacement.random(Field.SIZE * Field.SIZE)
     while (arrVariantAttack[rndIndex] === "") {
         rndIndex = RandomPlacement.random(Field.SIZE * Field.SIZE)

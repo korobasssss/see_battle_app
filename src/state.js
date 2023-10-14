@@ -6,7 +6,7 @@ import {getCoordinate} from "./logic/IIPlayerStrategy";
 const state = {
     player: {
         name: "",
-        field: [],
+        field: []
     },
     game: {
         gameState: " ",
@@ -22,7 +22,7 @@ const state = {
     },
     opponent: {
         name: "ИГРОК 2",
-        field: {}
+        field: []
     }
 }
 
@@ -47,33 +47,36 @@ export let getOpponentName = () => {
 }
 
 export let arrangePlayer = () => {
+
     if (state.game.status.arrange === false) {
-        console.log("wow wht happens")
         state.game.status.arrange = true
 
+        console.log("new game hehe")
         state.game.gameState = new GameState()
+        state.game.gameState.setTypeGame(state.game.TYPE)
 
         if (getGameTypeOpponent() === "II") {
             state.game.gameState.getRandomPlacement()
         } else {
             state.game.gameState.getRandomPlacementBoth()
         }
-        updateTables()
 
+        updateTables()
         getUIField()
+
     }
 }
 
 export let repeatRandomPlacement = () => {
-    console.log("repeR")
     state.game.gameState.getRandomPlacement()
 
     updateTables()
 
 }
 
-let getUIField = async () => {
+let getUIField = () => {
     updateTables()
+
 
     if (state.game.OPPONENT === "II") {
         state.game.turnField = state.player.field
@@ -82,12 +85,9 @@ let getUIField = async () => {
         state.game.turnField = state.game.gameState.getTurnField()
         state.game.notTurnField = state.game.gameState.getNotTurnField()
     }
-     if (state.game.status.game === "GAME") {
-         await new Promise(resolve => setTimeout(resolve, 2000))
-     }
-
     updateTables()
 }
+
 
 export let whoOpponent = () => {
     if (state.game.OPPONENT === "II") {
@@ -116,7 +116,11 @@ export let startGame = () => {
         state.game.status.game = "GAME"
         state.game.gameState.setStartGame()
     }
+}
 
+export let newGame = () => {
+    state.game.status.game = "NOT_START"
+    state.game.status.arrange = false
 }
 
 export let attack = (e) => {
@@ -142,18 +146,24 @@ export let attack = (e) => {
 
 
 export let attackII = () => {
+
     if (state.game.status.game === "GAME" && state.game.OPPONENT === "II") {
         if (state.game.gameState.getWhoseTurn() === LocalGame.WHO.SECOND_PLAYER) {
-            setTimeout(() => {
-                state.game.gameState.getOpponent().setCurrCoordinate(getCoordinate());
-                if (state.game.gameState.getGame().attacks()) {
-                    state.game.status.game = "FINISH"
-                    state.game.statistic.push(statistic())
-                    //соо
-                }
-            }, 2000)
 
-            //соо об атаке игрока
+            // setTimeout(() => {
+            //     state.game.gameState.getOpponent().setCurrCoordinate(getCoordinate());
+            //     if (state.game.gameState.getGame().attacks()) {
+            //         state.game.status.game = "FINISH"
+            //         state.game.statistic.push(statistic())
+            //     }
+            // }, 2000)
+
+            state.game.gameState.getOpponent().setCurrCoordinate(getCoordinate());
+            if (state.game.gameState.getGame().attacks()) {
+                state.game.status.game = "FINISH"
+                state.game.statistic.push(statistic())
+            }
+            updateTables()
         }
     }
 }
@@ -243,7 +253,7 @@ export let getGameTypeShoot = () => {
     return state.game.TYPE
 }
 
-export let setGameTypeShoot = (type) => {
+export let setGameType = (type) => {
     state.game.TYPE = type
 }
 

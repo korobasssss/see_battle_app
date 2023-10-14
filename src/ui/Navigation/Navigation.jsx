@@ -2,7 +2,7 @@ import {NavLink} from "react-router-dom";
 import React from "react";
 import nav from "./Navigation.module.css"
 
-const Navigation = () => {
+const Navigation = (props) => {
     return (
         <section>
             <section>
@@ -11,8 +11,7 @@ const Navigation = () => {
                     <NavLink to={"/chooseOpponent"}>СТАТИСТИКА ИГР</NavLink>
                 </section>
                 <section className={nav.startAndExit}>
-                    <NavLink to={"/chooseOpponent"}>НАЧАТЬ СНАЧАЛА</NavLink>
-                    <NavLink to={"/chooseOpponent"}>ВЫХОД</NavLink>
+                    {props.gameComp}
                 </section>
 
             </section>

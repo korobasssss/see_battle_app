@@ -44,7 +44,6 @@ const ArrangementShips = (props) => {
                     </section>
                     <NavLink to={"/game"} className={reg.buttonNext}>ИГРАТЬ</NavLink>
                 </section>
-
                 <nav>
                     <Navigation/>
                 </nav>
