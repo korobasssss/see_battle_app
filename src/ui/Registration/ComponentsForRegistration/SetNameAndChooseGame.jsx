@@ -4,21 +4,17 @@ import reg from "../Registration.module.css";
 import {NavLink} from "react-router-dom";
 import Header from "../../Header/Header";
 import Navigation from "../../Navigation/Navigation";
+import {setGameTypeActionCreator, setPlayerNameActionCreator} from "../../../state";
 
 const SetNameAndChooseGame = (props) => {
 
 
-    const setName = (event) => {
-        console.log(props.getPlayerName())
-        props.setPlayerName(event.target.value)
+    let setName = (event) => {
+        props.dispatch(setPlayerNameActionCreator(event))
     }
 
     const setGameType = (event) => {
-        if (event.target.selectedIndex === 0) {
-            props.setGameType(event.target.value)
-        } else if (event.target.selectedIndex === 1) {
-            props.setGameType(event.target.value)
-        }
+        props.dispatch(setGameTypeActionCreator(event))
     }
 
     let checkName = (e) => {

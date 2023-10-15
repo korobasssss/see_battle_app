@@ -5,13 +5,31 @@ import reg from "../Registration.module.css";
 import Header from "../../Header/Header";
 import {NavLink} from "react-router-dom";
 import Navigation from "../../Navigation/Navigation";
+import {
+    arrangementPlayerActionCreator,
+    changeTurnActionCreator,
+    repeatRandomPlacementActionCreator, startGameActionCreator
+} from "../../../state";
 
 const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
+
+
 const ArrangementShips = (props) => {
-    props.arrange()
+    props.dispatch(arrangementPlayerActionCreator())
 
     let showButtonChangeField = () => {
-        return props.gameOpponent() !== "SECOND_PLAYER";
+        return props.getGameTypeOpponent() !== "SECOND_PLAYER";
+    }
+
+    let click = () => {
+        props.dispatch(changeTurnActionCreator())
+    }
+    let repeat = () => {
+        props.dispatch(repeatRandomPlacementActionCreator())
+    }
+
+    let startGame = () => {
+        props.dispatch(startGameActionCreator())
     }
 
     return (
@@ -28,21 +46,21 @@ const ArrangementShips = (props) => {
                             <section className={arr.field}>
                                 <table>
                                     {rowsAndColls.map((row) => (<tr> {
-                                        rowsAndColls.map((col) => (<td>{props.turnField()[row][col].getStatus()}</td>) )
+                                        rowsAndColls.map((col) => (<td>{props.getTurnField()[row][col].getStatus()}</td>) )
                                     }</tr>))}
                                 </table>
                             </section>
                             <section>
-                                <p>{props.getTurnName()}</p>
-                                <button disabled={showButtonChangeField()} onClick={props.checkTurn}> pass </button>
+                                <p>{props.nameWhoseTurn()}</p>
+                                <button disabled={showButtonChangeField()} onClick={click}> pass </button>
                             </section>
 
                         </section>
                         <section className={arr.forImg}>
-                            <img src={replay} onClick={props.repeate} className={arr.img_replay} alt={"repeat random arrangement"}/>
+                            <img src={replay} onClick={repeat} className={arr.img_replay} alt={"repeat random arrangement"}/>
                         </section>
                     </section>
-                    <NavLink to={"/game"} className={reg.buttonNext}>ИГРАТЬ</NavLink>
+                    <NavLink to={"/game"} className={reg.buttonNext} onClick={startGame}>ИГРАТЬ</NavLink>
                 </section>
                 <nav>
                     <Navigation/>

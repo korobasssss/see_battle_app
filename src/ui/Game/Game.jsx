@@ -3,22 +3,35 @@ import Header from "../Header/Header";
 import game from "./Game.module.css"
 import Navigation from "../Navigation/Navigation";
 import GameNavigation from "../Navigation/GameNavigation";
+import {attackActionCreator, attackIIActionCreator, newGameActionCreator} from "../../state";
 
 const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
+
 
 const Game = (props) => {
 
     let textComments = () => {
-        if (props.status() === "FINISH") {
+        if (props.statusGame() === "FINISH") {
             return "ПОБЕДИЛ ИГРОК " + props.whoseWin()
         } else {
-            return "ХОД ИГРОКА " + props.textMessage.nameWhoseTurn()
+            return "ХОД ИГРОКА " + props.nameWhoseTurn()
         }
     }
+    let attack_II = () => {
+        props.dispatch(attackIIActionCreator())
+    }
+    const action = (e) => {
+        props.dispatch(attackActionCreator(e))
+    }
+    let newGame = () => {
+        props.dispatch(newGameActionCreator());
 
-    props.startGame()
+    }
 
-    props.attackII()
+
+
+    attack_II()
+
 
     return (
         <section className={game.main}>
@@ -28,28 +41,28 @@ const Game = (props) => {
             <section className={game.fieldsAndMessages}>
                 <section className={game.fields}>
                     <section className={game.fieldDecs}>
-                        КОЛИЧЕСТВО КОРАБЛЕЙ: {props.textMessage.turnLiveShips()}
+                        КОЛИЧЕСТВО КОРАБЛЕЙ: {props.turnLiveShips()}
                         <table>
                             {rowsAndColls.map((row) => (<tr> {
-                                rowsAndColls.map((col) => (<td>{props.turnField()[row][col].getStatus()}</td>) )
+                                rowsAndColls.map((col) => (<td>{props.getTurnField()[row][col].getStatus()}</td>) )
                             }</tr>))}
                         </table>
-                        {props.textMessage.nameWhoseTurn()}
+                        {props.nameWhoseTurn()}
                     </section>
                     <section className={game.fieldDecs}>
-                        КОЛИЧЕСТВО КОРАБЛЕЙ: {props.textMessage.opponentLiveShips()}
+                        КОЛИЧЕСТВО КОРАБЛЕЙ: {props.opponentLiveShips()}
                         <table >
                             {rowsAndColls.map((row) => (<tr> {
-                                rowsAndColls.map((col) => (<td onClick={props.attack}>{props.opponentField()[row][col].getStatus()}</td>) )
+                                rowsAndColls.map((col) => (<td onClick={action}>{props.getNotTurnField()[row][col].getStatus()}</td>) )
                             }</tr>))}
                         </table>
-                        {props.textMessage.nameWhoseOpponent()}
+                        {props.nameWhoseOpponent()}
                     </section>
                 </section>
                 <p>{textComments()}</p>
             </section>
             <nav>
-                <Navigation gameComp={<GameNavigation newGame={props.newGame}/>}/>
+                <Navigation gameComp={<GameNavigation newGame={newGame}/>}/>
             </nav>
         </section>
 

@@ -4,6 +4,7 @@ import reg from "../Registration.module.css";
 import {NavLink} from "react-router-dom";
 import Header from "../../Header/Header";
 import Navigation from "../../Navigation/Navigation";
+import {setGameTypeOpponentActionCreator, setOpponentNameActionCreator} from "../../../state";
 
 let secondPlayerInput = true;
 
@@ -12,25 +13,20 @@ const ChooseOpponent = (props) => {
 
     const setOpponent = (event) => {
         if (event.target.selectedIndex === 0) {
-            props.setGameOpp(event.target.value)
             secondPlayerInput = true
         } else if (event.target.selectedIndex === 1) {
-            props.setGameOpp(event.target.value)
             secondPlayerInput = false;
         }
-
-        props.update()
+        props.dispatch(setGameTypeOpponentActionCreator(event))
     }
 
     const setName = (event) => {
-        console.log(props.getOppName())
-        props.setOppName(event.target.value)
+        props.dispatch(setOpponentNameActionCreator(event))
     }
 
     let checkName = (e) => {
-        if (props.getGameOpp() === "SECOND_PLAYER") {
-            if (props.getGameOpp() === "" || props.getGameOpp() === undefined) {
-                console.log("im here")
+        if (props.getGameTypeOpponent() === "SECOND_PLAYER") {
+            if (props.getOpponentName() === "" || props.getOpponentName() === undefined) {
                 e.preventDefault()
             }
         }
@@ -54,7 +50,7 @@ const ChooseOpponent = (props) => {
                     </section>
                     <section className="twoPlayers">
                         <legend>ВВЕДИТЕ ИМЯ ВТОРОГО ИГРОКА</legend>
-                        <input type="text" disabled={secondPlayerInput} onChange={setName} value={props.getOppName()}/>
+                        <input type="text" disabled={secondPlayerInput} onChange={setName} value={props.getOpponentName()}/>
                     </section>
                     <NavLink to={"/arrangement"} onClick={checkName} className={reg.buttonNext}>ДАЛЕЕ</NavLink>
                 </section>
