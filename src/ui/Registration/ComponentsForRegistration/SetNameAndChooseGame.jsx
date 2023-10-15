@@ -4,7 +4,7 @@ import reg from "../Registration.module.css";
 import {NavLink} from "react-router-dom";
 import Header from "../../Header/Header";
 import Navigation from "../../Navigation/Navigation";
-import {setGameTypeActionCreator, setPlayerNameActionCreator} from "../../../state";
+import {setGameTypeActionCreator, setPlayerNameActionCreator} from "../../../redux/state";
 
 const SetNameAndChooseGame = (props) => {
 
@@ -18,7 +18,7 @@ const SetNameAndChooseGame = (props) => {
     }
 
     let checkName = (e) => {
-        if (props.getPlayerName() === "" || props.getPlayerName() === undefined) {
+        if (props.getPlayerName === "" || props.getPlayerName === undefined) {
             e.preventDefault()
         }
     }
@@ -35,7 +35,7 @@ const SetNameAndChooseGame = (props) => {
                 <section className={form.main}>
                     <section>
                         <legend> ВВЕДИТЕ ИМЯ </legend>
-                        <input type="text" onChange={setName} value={props.getPlayerName()}/>
+                        <input type="text" onChange={setName} value={props.getPlayerName}/>
                     </section>
                     <section>
                         <legend> ВЫБЕРИТЕ ТИП ИГРЫ </legend>

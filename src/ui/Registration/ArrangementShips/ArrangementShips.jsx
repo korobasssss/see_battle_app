@@ -6,19 +6,17 @@ import Header from "../../Header/Header";
 import {NavLink} from "react-router-dom";
 import Navigation from "../../Navigation/Navigation";
 import {
-    arrangementPlayerActionCreator,
     changeTurnActionCreator,
     repeatRandomPlacementActionCreator, startGameActionCreator
-} from "../../../state";
+} from "../../../redux/state";
 
 const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
 
-
 const ArrangementShips = (props) => {
-    props.dispatch(arrangementPlayerActionCreator())
 
+    console.log(props.getTurnField)
     let showButtonChangeField = () => {
-        return props.getGameTypeOpponent() !== "SECOND_PLAYER";
+        return props.getGameTypeOpponent !== "SECOND_PLAYER";
     }
 
     let click = () => {
@@ -46,12 +44,12 @@ const ArrangementShips = (props) => {
                             <section className={arr.field}>
                                 <table>
                                     {rowsAndColls.map((row) => (<tr> {
-                                        rowsAndColls.map((col) => (<td>{props.getTurnField()[row][col].getStatus()}</td>) )
+                                        rowsAndColls.map((col) => (<td>{props.getTurnField[row][col]}</td>) )
                                     }</tr>))}
                                 </table>
                             </section>
                             <section>
-                                <p>{props.nameWhoseTurn()}</p>
+                                <p>{props.nameWhoseTurn}</p>
                                 <button disabled={showButtonChangeField()} onClick={click}> pass </button>
                             </section>
 

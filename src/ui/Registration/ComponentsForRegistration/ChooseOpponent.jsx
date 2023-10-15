@@ -4,7 +4,11 @@ import reg from "../Registration.module.css";
 import {NavLink} from "react-router-dom";
 import Header from "../../Header/Header";
 import Navigation from "../../Navigation/Navigation";
-import {setGameTypeOpponentActionCreator, setOpponentNameActionCreator} from "../../../state";
+import {
+    arrangementPlayerActionCreator,
+    setGameTypeOpponentActionCreator,
+    setOpponentNameActionCreator
+} from "../../../redux/state";
 
 let secondPlayerInput = true;
 
@@ -25,10 +29,14 @@ const ChooseOpponent = (props) => {
     }
 
     let checkName = (e) => {
-        if (props.getGameTypeOpponent() === "SECOND_PLAYER") {
-            if (props.getOpponentName() === "" || props.getOpponentName() === undefined) {
+        if (props.getGameTypeOpponent === "SECOND_PLAYER") {
+            if (props.getOpponentName === "" || props.getOpponentName === undefined) {
                 e.preventDefault()
+            } else {
+                props.dispatch(arrangementPlayerActionCreator())
             }
+        } else {
+            props.dispatch(arrangementPlayerActionCreator())
         }
 
     }
@@ -50,7 +58,7 @@ const ChooseOpponent = (props) => {
                     </section>
                     <section className="twoPlayers">
                         <legend>ВВЕДИТЕ ИМЯ ВТОРОГО ИГРОКА</legend>
-                        <input type="text" disabled={secondPlayerInput} onChange={setName} value={props.getOpponentName()}/>
+                        <input type="text" disabled={secondPlayerInput} onChange={setName} value={props.getOpponentName}/>
                     </section>
                     <NavLink to={"/arrangement"} onClick={checkName} className={reg.buttonNext}>ДАЛЕЕ</NavLink>
                 </section>

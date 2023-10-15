@@ -13,8 +13,20 @@ export class GameState {
         this.#player2 = new Player()
 
         this.#game = new LocalGame(this.#player1, this.#player2)
-        console.log("first")
         this.#game.randomShipsOnField(this.#player2)
+    }
+
+    _returnCellStatus = (arr) => {
+        console.log(arr)
+        let newArr = []
+        for (let i = 0; i < arr.length; i++) {
+            let min_arr = []
+            for (let j = 0; j < arr.length; j++) {
+                min_arr.push(arr[i][j]._status)
+            }
+            newArr.push(min_arr)
+        }
+        return newArr
     }
 
     getRandomPlacement = () => {
@@ -31,11 +43,11 @@ export class GameState {
     }
 
     getPlayerField = () => {
-       return this.#player1.field.field
+       return this._returnCellStatus(this.#player1.field.field)
     }
 
     getOpponentField = () => {
-        return this.#player2.field.field
+        return this._returnCellStatus(this.#player2.field.field)
     }
 
     getWhoseTurn = () => {
@@ -60,17 +72,17 @@ export class GameState {
 
     getTurnField = () => {
         if (this.#game.getWho() === LocalGame.WHO.FIRST_PLAYER) {
-            return this.#player1.field.field
+            return this._returnCellStatus(this.#player1.field.field)
         } else {
-            return this.#player2.field.field
+            return this._returnCellStatus(this.#player2.field.field)
         }
     }
 
     getNotTurnField = () => {
         if (this.getWhoseTurn() === LocalGame.WHO.FIRST_PLAYER) {
-            return this.#player2.field.field
+            return this._returnCellStatus(this.#player2.field.field)
         } else {
-            return this.#player1.field.field
+            return this._returnCellStatus(this.#player1.field.field)
         }
     }
 

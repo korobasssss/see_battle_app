@@ -1,7 +1,7 @@
 import Cell from "./elements/cell";
 import Ship from "./elements/ship";
 import RandomPlacement from "./elements/field/randomPlacement"
-import {whoseWin} from "../state";
+import {whoseWin} from "../redux/state";
 class LocalGame {
     static WHO = {
         FIRST_PLAYER: "FIRST_PLAYER",
@@ -24,7 +24,7 @@ class LocalGame {
     _player1;
     _player2;
 
-    _gameType = LocalGame.TYPE.QUEUE
+    _gameType
 
     _flagOfStayPlayer = false;
     _getLastCellStatus = Cell.STATIC.EMPTY;
@@ -44,6 +44,8 @@ class LocalGame {
         this._player1 = player1
         this._who = LocalGame.WHO.FIRST_PLAYER
         this._player2 = player2;
+
+        this._gameType = LocalGame.TYPE.QUEUE
     }
 
     _player() {
@@ -58,61 +60,7 @@ class LocalGame {
         else if (this._who === LocalGame.WHO.SECOND_PLAYER) {
             this._who = LocalGame.WHO.FIRST_PLAYER;
         }
-
-        // console.log("change 2", this._who)
     }
-
-    // placementFigures() {
-    //     if (this.#player().ships.length < this.#player().field.getCountShips()) {
-    //         let ship = new Ship(this.#player().currCoordinate, Ship.SHIP_TYPE.ONE_CELL, Ship.ORIENTATION.VERTICAL, Ship.STATUS.ALIVE);
-    //         this.#makeShip(this.#player(), ship);
-    //         if (this.#player().field.canMakeShipOrNot(ship)) {
-    //             this.#player().setShip(ship);
-    //         } else {
-    //             this.#gameUI.messageOfWrongNumberOrLetter(this.#player().name);
-    //         }
-    //     }
-    //     this.#gameUI.print(this.#player());
-    //
-    //     return new StepEvent(this.#player(), this.#player().currCoordinate, this.#getLastCellStatus, this.#getLastShipStatus); //todo stepevent
-    // }
-
-    // changeShipOrientation(ship) {
-    //     ship.orientation(ship.orientation);
-    //     this.#player().field.deleteFigure(this.#player(), this.#player().field.findShip(this.#player(),
-    //         this.#player().currCoordinate.vertical, this.#player().currCoordinate.horizontal));
-    //     if (!this.#player().field.canMakeShipOrNot(ship)) {
-    //         ship.orientation(ship.orientation);
-    //         this.#gameUI.messageOfWrongNumberOrLetter(this.#player().name);
-    //     }
-    //     this.#player().setShip(ship);
-    //
-    //     return new StepEvent(this.#player(), this.#player().currCoordinate, this.#getLastCellStatus, this.#getLastShipStatus)
-    // }
-
-
-    // #makeShip(player, ship) {
-    //     if (player.ships.length < player.getField().getOneCellShip()) {
-    //
-    //     } else if (player.ships.size() < player.field.getOneCellShip()
-    //         + player.field.getTwoCellShip()) {
-    //         ship.type(Ship.SHIP_TYPE.TWO_CELLS);
-    //     } else if (player.ships.length < player.field.getOneCellShip()
-    //         + player.field.getTwoCellShip()
-    //         + player.field.getThreeCellShip()) {
-    //         ship.type(Ship.SHIP_TYPE.THREE_CELLS);
-    //     } else if (player.ships.length < player.field.getOneCellShip()
-    //         + player.field.getTwoCellShip()
-    //         + player.field.getThreeCellShip()
-    //         + player.field.getFourCellShip()) {
-    //         ship.type(Ship.SHIP_TYPE.FOURTH_CELLS);
-    //     }
-    //
-    //     if (this.#gameUI instanceof ConsoleUI && ship.type != Ship.SHIP_TYPE.ONE_CELL) { //todo consoleUI
-    //         let des = Number.parseInt(gameUI.decisionOfShipOrientation(player.name));
-    //         if (des === 1) ship.orientation(Ship.ORIENTATION.HORIZONTAL);
-    //     }
-    // }
 
     randomShipsOnField = (player) => {
         RandomPlacement.getRandomField(player);
@@ -132,7 +80,7 @@ class LocalGame {
             }
             default:
         }
-
+        debugger
         if (this._gameType === LocalGame.TYPE.QUEUE) {
             this._changeTurn();
             return result
