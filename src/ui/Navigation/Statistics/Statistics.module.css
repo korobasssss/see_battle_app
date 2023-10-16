@@ -1,0 +1,36 @@
+.main {
+    width: 30%;
+    padding: 1% 2% 2% 2%;
+
+    display: grid;
+    grid-template-rows: 5% 95%;
+}
+
+.titleDesc{
+    display: grid;
+    justify-items: center;
+}
+
+.cross {
+    display: grid;
+    justify-self: right;
+
+    color: rgba(53, 72, 132, 1);
+    text-decoration: none;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 10% 70% 10%;
+    justify-items: center;
+    column-gap: 5%;
+
+    justify-self: center;
+
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+table {
+    border: none;
+}

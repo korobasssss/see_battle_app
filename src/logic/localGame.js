@@ -27,6 +27,7 @@ class LocalGame {
     _gameType
 
     _flagOfStayPlayer = false;
+    _flag_forChange = false
     _getLastCellStatus = Cell.STATIC.EMPTY;
     _getLastShipStatus = Ship.STATUS.NOTHING;
 
@@ -80,9 +81,14 @@ class LocalGame {
             }
             default:
         }
-        debugger
         if (this._gameType === LocalGame.TYPE.QUEUE) {
-            this._changeTurn();
+            if (!result) {
+                if (!this._flag_forChange) {
+                    this._changeTurn();
+                } else {
+                    this._flag_forChange = false
+                }
+            }
             return result
         }
         if (this._flagOfStayPlayer) {
@@ -106,7 +112,6 @@ class LocalGame {
         switch (cellStatus) {
             case "SHIP" : {
                 this._getLastCellStatus = Cell.STATIC.SHIP;
-                //player.opponentField.setCellStatus(coordinate, Cell.STATIC.SHIP_MARKED);
                 playerAttacked.field.setCellStatus(coordinate, Cell.STATIC.SHIP_MARKED);
 
                 if (!player.field.hurtOrKill(playerAttacked.field, playerAttacked.field.findShip(playerAttacked,
@@ -129,12 +134,14 @@ class LocalGame {
                 this._getLastCellStatus = Cell.STATIC.MARKED;
                 this._getLastShipStatus = Ship.STATUS.NOTHING;
                 this._flagOfStayPlayer = true;
+                this._flag_forChange = true
                 break
             }
             case "SHIP_MARKED" : {
                 this._getLastCellStatus = Cell.STATIC.SHIP_MARKED;
                 this._getLastShipStatus = Ship.STATUS.NOTHING;
                 this._flagOfStayPlayer = true;
+                this._flag_forChange = true
                 break
             }
             default: return 0

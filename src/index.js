@@ -8,8 +8,6 @@ import reduxStore from "./redux/reduxStore";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 let renderer = (state) => {
-    console.log(state.game)
-
     root.render(
         <React.StrictMode>
             <App store={reduxStore} state={state.game}/>

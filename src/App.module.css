@@ -1,9 +1,23 @@
 .App {
   height: 100vh;
+  background-color: rgba(211, 221, 255, 1);
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: rgba(53, 72, 132, 1);
+}
+
+.page {
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: 90% 10%;
+
+  padding: 0% 2% 0% 2%;
 }
 
 .main {
-  height: 100%;
 
   display: grid;
   justify-items: center;

@@ -3,8 +3,14 @@ import form from "./Form.module.css"
 import reg from "../Registration.module.css";
 import {NavLink} from "react-router-dom";
 import Header from "../../Header/Header";
-import Navigation from "../../Navigation/Navigation";
-import {setGameTypeActionCreator, setPlayerNameActionCreator} from "../../../redux/state";
+import navCss from "../../Navigation/Navigation.module.css"
+import {
+    pageArrange,
+    pageChooseOpp, pageGame,
+    pageSetName,
+    setGameTypeActionCreator,
+    setPlayerNameActionCreator
+} from "../../../redux/state";
 
 const SetNameAndChooseGame = (props) => {
 
@@ -20,35 +26,43 @@ const SetNameAndChooseGame = (props) => {
     let checkName = (e) => {
         if (props.getPlayerName === "" || props.getPlayerName === undefined) {
             e.preventDefault()
+        } else {
+            props.dispatch(pageSetName())
         }
     }
-
-
+    //
+    // let reset = () => {
+    //     if (props.pageGame) {
+    //         props.dispatch(pageSetName())
+    //         props.dispatch(pageChooseOpp())
+    //         props.dispatch(pageArrange())
+    //         props.dispatch(pageGame())
+    //     }
+    // }
+    //
+    // reset()
 
     return (
         <section className={form.registration + " " + reg.information}>
-            <section className={reg.main }>
+            <section className={reg.main}>
                 <section className={reg.header}>
                     <Header/>
                 </section>
 
                 <section className={form.main}>
-                    <section>
+                    <section className={form.legendInput}>
                         <legend> ВВЕДИТЕ ИМЯ </legend>
                         <input type="text" onChange={setName} value={props.getPlayerName}/>
                     </section>
-                    <section>
+                    <section className={form.legendInput}>
                         <legend> ВЫБЕРИТЕ ТИП ИГРЫ </legend>
                         <select name="" id="" onChange={setGameType}>
                             <option value="QUEUE">СТРЕЛЬБА СТРОГО ПО ОЧЕРЕДИ</option>
                             <option value="MISS">СТРЕЛЬБА ДО ПРОМАХА</option>
                         </select>
                     </section>
-                    <NavLink to={"/chooseOpponent"} onClick={checkName} className={reg.buttonNext} disabled={true}>ДАЛЕЕ</NavLink>
+                    <NavLink to={"/chooseOpponent"} onClick={checkName} className={reg.buttonNext + " " + navCss.startAndExit} disabled={true}>ДАЛЕЕ</NavLink>
                 </section>
-                <nav>
-                    <Navigation/>
-                </nav>
             </section>
         </section>
 

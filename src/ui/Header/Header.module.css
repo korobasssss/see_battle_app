@@ -1,14 +1,17 @@
 img {
     width: 100%;
+    display: grid;
+    align-self: end;
 }
 
 .header {
     display: grid;
     grid-template-columns: 10% 70% 10%;
+    justify-items: center;
     column-gap: 5%;
 
     justify-self: center;
-    align-items: center;
 
-    font-size: 2em;
+    font-size: 2rem;
+    font-weight: 600;
 }

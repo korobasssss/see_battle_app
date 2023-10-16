@@ -2,16 +2,22 @@
     width: 20%;
 }
 
+.page {
+    display: grid;
+    justify-items: center;
+}
+
 .main {
     width: 100%;
     height: 100%;
     display: grid;
     grid-template-rows: 10% 90%;
+    padding-top: 2%;
 }
 
 .fields {
     width: 90%;
-    height: 70%;
+    height: 90%;
     display: grid;
     justify-self: center;
     align-self: center;
@@ -20,13 +26,18 @@
 }
 
 .fieldsAndMessages {
-
+    width: 90%;
+    display: grid;
+    grid-template-rows: 80% 20%;
+    justify-items: center;
 }
 
 .fieldDecs {
     display: grid;
     grid-template-rows: 5% 80% 5%;
     row-gap: 5%;
+
+    justify-items: center;
 }
 
 table {
@@ -35,6 +46,10 @@ table {
     height: 100%;
 }
 
+.messages {
+    font-size: 1.5rem;
+}
+
 td {
-    border: 1px solid black;
+    border: 2px solid rgba(53, 72, 132, 1);
 }

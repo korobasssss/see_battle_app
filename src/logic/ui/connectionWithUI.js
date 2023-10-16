@@ -17,7 +17,6 @@ export class GameState {
     }
 
     _returnCellStatus = (arr) => {
-        console.log(arr)
         let newArr = []
         for (let i = 0; i < arr.length; i++) {
             let min_arr = []

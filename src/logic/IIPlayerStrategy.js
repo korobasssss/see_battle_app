@@ -15,8 +15,6 @@ let setVariations = () => {
 let arrVariantAttack = setVariations()
 
 export let getCoordinate = () => {
-    console.log("2, get a coordinate")
-    // console.log("ii take coord")
     let rndIndex = RandomPlacement.random(Field.SIZE * Field.SIZE)
     while (arrVariantAttack[rndIndex] === "") {
         rndIndex = RandomPlacement.random(Field.SIZE * Field.SIZE)

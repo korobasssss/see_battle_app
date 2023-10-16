@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 import Header from "../../Header/Header";
 import Navigation from "../../Navigation/Navigation";
 import {
-    arrangementPlayerActionCreator,
+    arrangementPlayerActionCreator, pageChooseOpp, pageSetName,
     setGameTypeOpponentActionCreator,
     setOpponentNameActionCreator
 } from "../../../redux/state";
@@ -37,6 +37,7 @@ const ChooseOpponent = (props) => {
             }
         } else {
             props.dispatch(arrangementPlayerActionCreator())
+            props.dispatch(pageChooseOpp())
         }
 
     }
@@ -49,22 +50,19 @@ const ChooseOpponent = (props) => {
                 </section>
 
                 <section className={form.main}>
-                    <section>
+                    <section className={form.legendInput}>
                         <legend>ВЫБЕРИТЕ ПРОТИВНИКА</legend>
                         <select onChange={setOpponent}>
-                            <option value="II">Искусственный интеллект</option>
-                            <option value="SECOND_PLAYER">Второй игрок</option>
+                            <option value="II">ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ</option>
+                            <option value="SECOND_PLAYER">ВТОРОЙ ИГРОК</option>
                         </select>
                     </section>
-                    <section className="twoPlayers">
+                    <section className={"twoPlayers " + form.legendInput}>
                         <legend>ВВЕДИТЕ ИМЯ ВТОРОГО ИГРОКА</legend>
                         <input type="text" disabled={secondPlayerInput} onChange={setName} value={props.getOpponentName}/>
                     </section>
                     <NavLink to={"/arrangement"} onClick={checkName} className={reg.buttonNext}>ДАЛЕЕ</NavLink>
                 </section>
-                <nav>
-                    <Navigation/>
-                </nav>
             </section>
         </section>
 
