@@ -18,16 +18,3 @@
     display: grid;
     justify-items: center;
 }
-
-.header {
-    width: 70%;
-    display: grid;
-    grid-template-columns: 15% 60% 15%;
-    justify-items: center;
-    column-gap: 5%;
-
-    justify-self: center;
-
-    font-size: 2rem;
-    font-weight: 600;
-}

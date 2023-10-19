@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
 import nav from "./Navigation.module.css"
-import {newGameActionCreator, pageGame, pageSetName} from "../../redux/state";
+import {newGameActionCreator, pageGame, pageSetName} from "../../redux/constants";
 
 const Navigation = (props) => {
 

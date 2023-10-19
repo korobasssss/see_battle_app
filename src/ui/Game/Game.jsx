@@ -2,7 +2,13 @@ import React from "react";
 import Header from "../Header/Header";
 import game from "./Game.module.css"
 import "../Table.css"
-import {attackActionCreator, attackIIActionCreator, newGameActionCreator} from "../../redux/state";
+import {
+    attackActionCreator,
+    attackIIActionCreator,
+    GAME_OPPONENT,
+    GAME_STATUS, GAME_TYPE, GAME_WHOSE_TURN,
+    newGameActionCreator
+} from "../../redux/constants";
 
 const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
 
@@ -10,17 +16,28 @@ const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
 const Game = (props) => {
 
     let textComments = () => {
-        if (props.statusGame === "FINISH") {
+        if (props.statusGame === GAME_STATUS.FINISH) {
             return "ПОБЕДИЛ ИГРОК " + props.whoseWin
         } else {
             return "ХОД ИГРОКА " + props.nameWhoseTurn
         }
     }
-    let attack_II = () => {
-        if (props.getGameTypeOpponent === "II" && props.whoseTurnState === "SECOND_PLAYER" && props.statusGame === "GAME") {
-            props.dispatch(attackIIActionCreator())
+    let textGameType = () => {
+        if (props.typeGame === GAME_TYPE.QUEUE) {
+            return "ПО ОЧЕРЕДИ"
+        } else {
+            return ""
         }
+    }
 
+    let attack_II = () => {
+        console.log("in jsx", props.whoseTurnState)
+        if (props.statusGame === GAME_STATUS.GAME &&
+            props.whoseTurnState === GAME_WHOSE_TURN.SECOND_PLAYER &&
+            props.getGameTypeOpponent === GAME_OPPONENT.II ) {
+                console.log("in if", props.whoseTurnState)
+                props.dispatch(attackIIActionCreator())
+        }
     }
     const action = (e) => {
         props.dispatch(attackActionCreator(e))
@@ -28,11 +45,15 @@ const Game = (props) => {
 
     attack_II()
 
-
     return (
         <section className={game.main}>
             <section className={game.header}>
                 <Header/>
+                <aside>
+                    <p>ИМЯ: {props.playerName}</p>
+                    <p>ТИП ИГРЫ: {props.typeGame}</p>
+                    <p>СЧЁТ: {props.score}</p>
+                </aside>
             </section>
             <section className={game.page}>
                 <section className={game.fieldsAndMessages}>
@@ -41,7 +62,7 @@ const Game = (props) => {
                             КОЛИЧЕСТВО КОРАБЛЕЙ: {props.turnLiveShips}
                             <table>
                                 {rowsAndColls.map((row) => (<tr> {
-                                    rowsAndColls.map((col) => (<td className={props.getTurnField[row][col]}></td>) )
+                                    rowsAndColls.map((col) => (<td className={props.getTurnField[row][col] + " " + game.td}></td>) )
                                 }</tr>))}
                             </table>
                             {props.nameWhoseTurn}
@@ -50,7 +71,7 @@ const Game = (props) => {
                             КОЛИЧЕСТВО КОРАБЛЕЙ: {props.opponentLiveShips}
                             <table >
                                 {rowsAndColls.map((row) => (<tr> {
-                                    rowsAndColls.map((col) => (<td className={props.getNotTurnField[row][col]} onClick={action}></td>) )
+                                    rowsAndColls.map((col) => (<td className={props.getNotTurnField[row][col] + " " + game.td} onClick={action}></td>) )
                                 }</tr>))}
                             </table>
                             {props.nameWhoseOpponent}

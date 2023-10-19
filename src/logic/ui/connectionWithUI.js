@@ -1,6 +1,7 @@
 
 import Player from "../elements/player";
 import LocalGame from "../localGame";
+import game from "../../ui/Game/Game";
 
 export class GameState {
     #player1
@@ -99,5 +100,9 @@ export class GameState {
 
     setTypeGame = (type) => {
         this.#game.setGameType(type)
+    }
+
+    getCurrentScore = () => {
+        return this.#game.getScore()
     }
 }

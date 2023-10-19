@@ -3,10 +3,12 @@ import rul from "./Rules.module.css"
 import React from "react";
 import reg from "../../Registration/Registration.module.css";
 import anchor from "../../../images/anchor.png";
+import head from "../../Header/Header.module.css"
 
 const Rules = (props) => {
 
     let previousPage = () => {
+        console.log(props.pageArrange)
         if (!props.pageSetName){
             return "/*"
         }
@@ -31,7 +33,7 @@ const Rules = (props) => {
                 <NavLink to={flagPage} className={rul.cross} >✕</NavLink>
                 <section className={rul.titleDesc}>
                     <section className={reg.header}>
-                        <header className={rul.header}>
+                        <header className={head.header}>
                             <img src={anchor} alt="anchor"/>
                             ПРАВИЛА
                             <img src={anchor} alt="anchor"/>

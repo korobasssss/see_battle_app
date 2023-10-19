@@ -1,16 +1,16 @@
 img {
     width: 100%;
     display: grid;
-    align-self: end;
+    align-self: center;
 }
 
 .header {
+    width: 100%;
     display: grid;
     grid-template-columns: 10% 70% 10%;
     justify-items: center;
+    align-items: center;
     column-gap: 5%;
-
-    justify-self: center;
 
     font-size: 2rem;
     font-weight: 600;

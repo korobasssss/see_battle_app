@@ -1,5 +1,6 @@
 .main {
     width: 30%;
+    height: 60%;
     padding: 1% 2% 2% 2%;
 
     display: grid;
@@ -8,7 +9,14 @@
 
 .titleDesc{
     display: grid;
+    grid-template-rows: 10% 85%;
+    row-gap: 5%;
     justify-items: center;
+}
+
+.title {
+    display: grid;
+    justify-self: center;
 }
 
 .cross {
@@ -19,18 +27,42 @@
     text-decoration: none;
 }
 
-.header {
+.sectionForTable {
+    width: 100%;
     display: grid;
-    grid-template-columns: 10% 70% 10%;
-    justify-items: center;
-    column-gap: 5%;
-
-    justify-self: center;
-
-    font-size: 2rem;
-    font-weight: 600;
+    grid-template-rows: 10% 90%;
 }
 
-table {
-    border: none;
+.sectionForTable tr{
+    border-bottom: 2px solid rgba(53, 72, 132, 1);
+}
+
+.tableStat, .tableHead {
+    border-collapse: collapse;
+}
+
+.tableHead th {
+    font-size: 1.4rem;
+}
+
+.tableStat {
+    width: 100%;
+}
+
+.scrollTable {
+    overflow-y: scroll;
+}
+
+.sectionForTable td {
+    padding: 3% 0 3% 0;
+    text-align: center;
+}
+
+::-webkit-scrollbar {
+    background-color: rgba(229, 233, 247, 1);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(179, 191, 232, 1);
+    border-radius: 20px;
 }

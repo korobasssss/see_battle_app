@@ -4,17 +4,16 @@ import replay from "../../../images/replay.png"
 import reg from "../Registration.module.css";
 import Header from "../../Header/Header";
 import {NavLink} from "react-router-dom";
-import tbl from "../../Table.css"
 import {
-    changeTurnActionCreator, pageArrange, pageSetName,
+    changeTurnActionCreator, GAME_OPPONENT, pageArrange,
     repeatRandomPlacementActionCreator, startGameActionCreator
-} from "../../../redux/state";
+} from "../../../redux/constants";
 
 const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
 
 const ArrangementShips = (props) => {
     let showButtonChangeField = () => {
-        return props.getGameTypeOpponent !== "SECOND_PLAYER";
+        return props.getGameTypeOpponent === GAME_OPPONENT.II;
     }
 
     let click = () => {
@@ -32,19 +31,18 @@ const ArrangementShips = (props) => {
 
     return (
         <section className={arr.arrangement + " " + reg.information}>
-            <section className={reg.main}>
+            <section className={reg.main + " " + arr.changeRowGap}>
                 <section className={reg.header}>
                     <Header/>
                 </section>
 
                 <section className={arr.main}>
-                    <section className={arr.fieldAndRepeat}>
                         <section className={arr.fieldAndDescr}>
                             РАССТАВЬТЕ КОРАБЛИ
                             <section className={arr.field}>
-                                <table>
+                                <table className={arr.table}>
                                     {rowsAndColls.map((row) => (<tr> {
-                                        rowsAndColls.map((col) => (<td className={props.getTurnField[row][col]}>{}</td>))
+                                        rowsAndColls.map((col) => (<td className={props.getTurnField[row][col] + " " + arr.td}>{}</td>))
                                     }</tr>))}
                                 </table>
                                 <section className={arr.forImg}>
@@ -56,8 +54,6 @@ const ArrangementShips = (props) => {
                                 <button disabled={showButtonChangeField()} onClick={click} className={arr.buttonChangePlayer}> СМЕНИТЬ ИГРОКА </button>
                             </section>
                         </section>
-
-                    </section>
                     <NavLink to={"/game"} className={reg.buttonNext} onClick={startGame}>ИГРАТЬ</NavLink>
                 </section>
             </section>

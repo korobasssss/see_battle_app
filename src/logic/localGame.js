@@ -1,7 +1,7 @@
 import Cell from "./elements/cell";
 import Ship from "./elements/ship";
 import RandomPlacement from "./elements/field/randomPlacement"
-import {whoseWin} from "../redux/state";
+import {whoseWin} from "../redux/constants";
 class LocalGame {
     static WHO = {
         FIRST_PLAYER: "FIRST_PLAYER",
@@ -25,6 +25,7 @@ class LocalGame {
     _player2;
 
     _gameType
+    _score
 
     _flagOfStayPlayer = false;
     _flag_forChange = false
@@ -47,6 +48,7 @@ class LocalGame {
         this._player2 = player2;
 
         this._gameType = LocalGame.TYPE.QUEUE
+        this._score = 0
     }
 
     _player() {
@@ -54,7 +56,6 @@ class LocalGame {
         return this._player2;
     }
     _changeTurn() {
-        // console.log("change 1", this._who)
         if (this._who === LocalGame.WHO.FIRST_PLAYER) {
             this._who = LocalGame.WHO.SECOND_PLAYER;
         }
@@ -69,12 +70,12 @@ class LocalGame {
     attacks() {
         let result = false
         switch (this._who) {
-            case "FIRST_PLAYER" : {
+            case LocalGame.WHO.FIRST_PLAYER : {
                 result = this._moveOnTheOpponent(this._player1, this._player2);
 
                 break
             }
-            case "SECOND_PLAYER" :  {
+            case LocalGame.WHO.SECOND_PLAYER:  {
                 result = this._moveOnTheOpponent(this._player2, this._player1);
 
                 break
@@ -103,41 +104,47 @@ class LocalGame {
     }
 
     _moveOnTheOpponent(player, playerAttacked) {
-        //this.#gameUI.messageWhereDidMove(player.name, player.coordinate);
         this._statusAttacks(playerAttacked.field.getCellStatus(player.getCurrCoordinate()), player.getCurrCoordinate(), player, playerAttacked);
         return this.finish();
     }
 
     _statusAttacks(cellStatus, coordinate, player, playerAttacked) {
         switch (cellStatus) {
-            case "SHIP" : {
+            case Cell.STATIC.SHIP : {
                 this._getLastCellStatus = Cell.STATIC.SHIP;
                 playerAttacked.field.setCellStatus(coordinate, Cell.STATIC.SHIP_MARKED);
 
                 if (!player.field.hurtOrKill(playerAttacked.field, playerAttacked.field.findShip(playerAttacked,
                                              coordinate.getVertical(), coordinate.getHorizontal()))) {
                     this._getLastShipStatus = Ship.STATUS.INJURED;
+                    if (this._who === LocalGame.WHO.FIRST_PLAYER) {
+                        this._score += 10
+                    }
+
                 } else {
                     this._getLastShipStatus = Ship.STATUS.KILLED;
                     playerAttacked.setCountLiveShips()
+                    if (this._who === LocalGame.WHO.FIRST_PLAYER) {
+                        this._score += 20
+                    }
                 }
                 break
             }
-            case "EMPTY" : {
+            case Cell.STATIC.EMPTY : {
                 this._getLastCellStatus = Cell.STATIC.EMPTY;
                 this._getLastShipStatus = Ship.STATUS.NOTHING;
 
                 playerAttacked.field.setCellStatus(coordinate, Cell.STATIC.MARKED);
                 break
             }
-            case "MARKED" : {
+            case Cell.STATIC.MARKED : {
                 this._getLastCellStatus = Cell.STATIC.MARKED;
                 this._getLastShipStatus = Ship.STATUS.NOTHING;
                 this._flagOfStayPlayer = true;
                 this._flag_forChange = true
                 break
             }
-            case "SHIP_MARKED" : {
+            case Cell.STATIC.SHIP_MARKED : {
                 this._getLastCellStatus = Cell.STATIC.SHIP_MARKED;
                 this._getLastShipStatus = Ship.STATUS.NOTHING;
                 this._flagOfStayPlayer = true;
@@ -150,16 +157,7 @@ class LocalGame {
 
     finish() {
         return this._player1.getCountLiveShips() === 0 || this._player2.getCountLiveShips() === 0;
-
     }
-
-    // shipsLifeStatus(ships) {
-    //     ships.forEach((ship) => {
-    //         if (ship.getStatus() === Ship.STATUS.ALIVE)
-    //             return true;
-    //     });
-    //     return false;
-    // }
 
     get player1() {
         return this._player1;
@@ -202,6 +200,10 @@ class LocalGame {
 
     setGameType(type) {
         this._gameType = type
+    }
+
+    getScore() {
+        return this._score
     }
 }
 

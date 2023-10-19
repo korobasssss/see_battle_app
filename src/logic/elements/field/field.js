@@ -25,32 +25,16 @@ class Field {
     }
     #setVerticalShipOnField = (ship) => {
         let coordinate = new Coordinate(0, ship.getPosition().getHorizontal());
-        // console.log(ship)
         for (let row = ship.getPosition().getVertical(); row < ship.getPosition().getVertical() + Number.parseInt(ship.type); row++) {
             coordinate.setVertical(row);
             this.setCellStatus(coordinate, Cell.STATIC.SHIP);
-            // let arr = Array.from(Array(Field.SIZE), () => new Array(Field.SIZE))
-            // for (let r = 0; r < this._field.length; r++) {
-            //     for (let c = 0; c < this._field.length; c++) {
-            //         arr[r][c] = this._field[r][c].getStatus()
-            //     }
-            // }
-            // console.log(arr)
         }
     }
     #setHorizontalShipOnField = (ship) => {
         let coordinate = new Coordinate(ship.getPosition().getVertical(), 0);
-        // console.log(ship)
         for (let col = ship.getPosition().getHorizontal(); col < ship.getPosition().getHorizontal() + Number.parseInt(ship.type); col++) {
             coordinate.setHorizontal(col);
             this.setCellStatus(coordinate, Cell.STATIC.SHIP);
-            // let arr = Array.from(Array(Field.SIZE), () => new Array(Field.SIZE))
-            // for (let r = 0; r < this._field.length; r++) {
-            //     for (let c = 0; c < this._field.length; c++) {
-            //         arr[r][c] = this._field[r][c].getStatus()
-            //     }
-            // }
-            // console.log(arr)
         }
     }
 
@@ -96,7 +80,6 @@ class Field {
                 }
             }
         }
-        console.log("dont fins a sho[")
     }
 
     clearField(player) {
@@ -108,7 +91,6 @@ class Field {
         for (let i = 0; i < player.ships.length; i++) {
             if (player.ships[i].length > 0 ) {
                 if (player.ships[i].getPosition() === ship.getPosition()) {
-                    console.log("imgete")
                     player.ships[i] = [];
                     break
                 }
@@ -195,7 +177,6 @@ class Field {
         if (ship.getOrientation() === Ship.ORIENTATION.VERTICAL) {
             this.#markCloseCellsAroundKilledVShip(opponentsField, ship)
         } else {
-            console.log("in else")
             this.#markCloseCellsAroundKilledHShip(opponentsField, ship)
         }
     }
@@ -273,26 +254,6 @@ class Field {
 
     set field(field) {
         this._field = field;
-    }
-
-    getCell(row, col) {
-        return this._field[row][col];
-    }
-
-    getCountShips() {
-        return 10;
-    }
-    getOneCellShip() {
-        return 4;
-    }
-    getTwoCellShip() {
-        return 3;
-    }
-    getThreeCellShip() {
-        return 2;
-    }
-    getFourCellShip() {
-        return 1;
     }
 }
 

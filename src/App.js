@@ -16,6 +16,7 @@ const App = (props) => {
                     <main className={app.main}>
                         <Routes>
                             <Route path="/*" element={<SetNameAndChooseGame  getPlayerName={props.state.player.name}
+                                                                             getGameType={props.state.game.TYPE}
                                                                              pageGame={props.state.pageData.arrange}
                                                                              dispatch={props.store.dispatch.bind(props.store)}/>}/>
                             <Route path="/chooseOpponent" element={<ChooseOpponent getOpponentName={props.state.opponent.name}
@@ -26,7 +27,10 @@ const App = (props) => {
                                                                                   getTurnField={props.state.game.turnField}
                                                                                   nameWhoseTurn={props.state.game.nameWhoseTurn}
                                                                                   dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                            <Route path="/game" element={<Game nameWhoseTurn={props.state.game.nameWhoseTurn}
+                            <Route path="/game" element={<Game playerName={props.state.player.name}
+                                                               typeGame={props.state.game.TYPE}
+                                                               score={props.state.game.score}
+                                                               nameWhoseTurn={props.state.game.nameWhoseTurn}
                                                                getGameTypeOpponent={props.state.game.OPPONENT}
                                                                whoseTurnState={props.state.game.whoseTurnState}
                                                                turnLiveShips={props.state.game.turnLiveShips}

@@ -1,3 +1,8 @@
+.registration {
+    width: 35%;
+    height: 45%;
+
+}
 .main {
     display: grid;
     grid-template-rows: 2fr 2fr 1fr;
@@ -5,7 +10,6 @@
     row-gap: 5%;
 
 }
-
 .legendInput {
     height: 100%;
     display: grid;
@@ -14,14 +18,13 @@
 
     width: 100%;
 }
-
 input, select {
     padding: 2%;
 
     background-color: rgba(160, 178, 234, 1);
     font-family: 'Montserrat', sans-serif;
     color: rgba(53, 72, 132, 1);
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 600;
 
     border-radius: 20px;
@@ -32,17 +35,8 @@ input, select {
 }
 
 input:disabled{
-    color: rgb(156, 163, 184);
+    color: rgb(125, 130, 143);
 }
-
 input:focus, select:focus {
     outline: 2px solid rgba(76, 103, 189, 1);
-}
-
-
-.registration {
-    width: 35%;
-    height: 45%;
-
-    display: grid;
 }

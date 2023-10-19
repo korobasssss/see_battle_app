@@ -5,12 +5,11 @@ import {NavLink} from "react-router-dom";
 import Header from "../../Header/Header";
 import navCss from "../../Navigation/Navigation.module.css"
 import {
-    pageArrange,
-    pageChooseOpp, pageGame,
+    GAME_TYPE,
     pageSetName,
     setGameTypeActionCreator,
     setPlayerNameActionCreator
-} from "../../../redux/state";
+} from "../../../redux/constants";
 
 const SetNameAndChooseGame = (props) => {
 
@@ -30,17 +29,6 @@ const SetNameAndChooseGame = (props) => {
             props.dispatch(pageSetName())
         }
     }
-    //
-    // let reset = () => {
-    //     if (props.pageGame) {
-    //         props.dispatch(pageSetName())
-    //         props.dispatch(pageChooseOpp())
-    //         props.dispatch(pageArrange())
-    //         props.dispatch(pageGame())
-    //     }
-    // }
-    //
-    // reset()
 
     return (
         <section className={form.registration + " " + reg.information}>
@@ -56,9 +44,9 @@ const SetNameAndChooseGame = (props) => {
                     </section>
                     <section className={form.legendInput}>
                         <legend> ВЫБЕРИТЕ ТИП ИГРЫ </legend>
-                        <select name="" id="" onChange={setGameType}>
-                            <option value="QUEUE">СТРЕЛЬБА СТРОГО ПО ОЧЕРЕДИ</option>
-                            <option value="MISS">СТРЕЛЬБА ДО ПРОМАХА</option>
+                        <select value={props.getGameType} onChange={setGameType}>
+                            <option value={GAME_TYPE.QUEUE} selected={props.getGameType === GAME_TYPE.QUEUE}>СТРЕЛЬБА СТРОГО ПО ОЧЕРЕДИ</option>
+                            <option value={GAME_TYPE.MISS} selected={props.getGameType === GAME_TYPE.MISS}>СТРЕЛЬБА ДО ПРОМАХА</option>
                         </select>
                     </section>
                     <NavLink to={"/chooseOpponent"} onClick={checkName} className={reg.buttonNext + " " + navCss.startAndExit} disabled={true}>ДАЛЕЕ</NavLink>
