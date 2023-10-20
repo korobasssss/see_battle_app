@@ -11,6 +11,7 @@ import {
 } from "../../redux/constants";
 
 const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
+const headerLetters = ["A", "B", "C ","D ","E ","F ","G ","H ","I ","J",];
 
 
 const Game = (props) => {
@@ -47,21 +48,29 @@ const Game = (props) => {
 
     return (
         <section className={game.main}>
-            <section className={game.header}>
-                <Header/>
+            <header className={game.header}>
+                <section className={game.headerStyle}>
+                    <Header/>
+                </section>
                 <aside>
                     <p>ИМЯ: {props.playerName}</p>
                     <p>ТИП ИГРЫ: {props.typeGame}</p>
                     <p>СЧЁТ: {props.score}</p>
                 </aside>
-            </section>
+            </header>
             <section className={game.page}>
                 <section className={game.fieldsAndMessages}>
                     <section className={game.fields}>
                         <section className={game.fieldDecs}>
                             КОЛИЧЕСТВО КОРАБЛЕЙ: {props.turnLiveShips}
                             <table>
-                                {rowsAndColls.map((row) => (<tr> {
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    {headerLetters.map((letter) => (<th>{letter}</th>))}
+                                </tr>
+                                </thead>
+                                {rowsAndColls.map((row) => (<tr> <th>{rowsAndColls[row] + 1}</th>{
                                     rowsAndColls.map((col) => (<td className={props.getTurnField[row][col] + " " + game.td}></td>) )
                                 }</tr>))}
                             </table>
@@ -70,7 +79,13 @@ const Game = (props) => {
                         <section className={game.fieldDecs}>
                             КОЛИЧЕСТВО КОРАБЛЕЙ: {props.opponentLiveShips}
                             <table >
-                                {rowsAndColls.map((row) => (<tr> {
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    {headerLetters.map((letter) => (<th>{letter}</th>))}
+                                </tr>
+                                </thead>
+                                {rowsAndColls.map((row) => (<tr> <th>{rowsAndColls[row] + 1}</th>{
                                     rowsAndColls.map((col) => (<td className={props.getNotTurnField[row][col] + " " + game.td} onClick={action}></td>) )
                                 }</tr>))}
                             </table>

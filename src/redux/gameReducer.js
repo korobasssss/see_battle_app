@@ -173,7 +173,10 @@ const gameReducer = (state = initialState, action) => {
     }
 
 
-
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    const runSleep = async () => {
+        await sleep()
+    }
 
     switch (action.type) {
         case SET_OPPONENT_NAME: {
@@ -230,7 +233,7 @@ const gameReducer = (state = initialState, action) => {
             state.pageData.setPlayerName = false
             state.pageData.setOpp = false
             state.pageData.arrange = false
-            state.pageData.game =false
+            state.pageData.game = false
             console.log(state.pageData.arrange)
             getUIField()
             return state
@@ -240,8 +243,8 @@ const gameReducer = (state = initialState, action) => {
             if (state.game.status.game === GAME_STATUS.GAME) {
                 let cell = action.index
 
-                let col = cell.cellIndex
-                let row = cell.parentNode.rowIndex
+                let col = cell.cellIndex - 1
+                let row = cell.parentNode.rowIndex - 1
 
                 if (state.game.gameState.getWhoseTurn() === LocalGame.WHO.FIRST_PLAYER) {
                     state.game.gameState.getPlayer().setCurrCoordinateRC(row, col);
@@ -253,6 +256,7 @@ const gameReducer = (state = initialState, action) => {
                     state.game.statistic.push(statistic())
                 }
                 getUIField()
+
             }
             return state
         }
@@ -266,7 +270,9 @@ const gameReducer = (state = initialState, action) => {
                     }
                     getUIField()
                 }
+                runSleep().then(r => console.log("hello world"))
             }
+
             return state
         }
         case SET_GAME_TYPE_OPPONENT: {
@@ -304,7 +310,8 @@ const gameReducer = (state = initialState, action) => {
             state.pageData.statistic = state.pageData.statistic !== true;
             return state
         }
-        default: return state
+        default:
+            return state
     }
 }
 

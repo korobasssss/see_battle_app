@@ -66,3 +66,20 @@
     background-color: rgba(179, 191, 232, 1);
     border-radius: 20px;
 }
+
+@media screen and (orientation: landscape) {
+    .main {
+        width: 30%;
+        height: 60%;
+
+        border: 5px solid rgba(40, 67, 152, 0.8);
+        border-radius: 30px;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .main {
+        width: 90%;
+        height: 60%;
+    }
+}

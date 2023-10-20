@@ -3,7 +3,6 @@
   background-color: rgba(211, 221, 255, 1);
 
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.1em;
   font-weight: 600;
   color: rgba(53, 72, 132, 1);
 }
@@ -14,7 +13,7 @@
   display: grid;
   grid-template-rows: 90% 10%;
 
-  padding: 0% 2% 0% 2%;
+  padding: 0 2% 0 2%;
 }
 
 .main {
@@ -22,4 +21,16 @@
   display: grid;
   justify-items: center;
   align-items: center;
+}
+
+@media screen and (orientation: landscape){
+    .App {
+       font-size: clamp(0.9rem, 1.1vw, 1.9rem);
+    }
+}
+
+@media screen and (orientation: portrait){
+  .App {
+    font-size: clamp(0.8rem, 1.1vw, 2rem);
+  }
 }

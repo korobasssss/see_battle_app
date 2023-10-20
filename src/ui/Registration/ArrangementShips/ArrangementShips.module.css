@@ -1,10 +1,3 @@
-.arrangement {
-    width: 40%;
-    height: 80%;
-
-    display: grid;
-}
-
 .changeRowGap {
     display: grid;
     row-gap: 5%;
@@ -14,57 +7,54 @@
     display: grid;
     justify-items: center;
     grid-template-rows: 90% 5%;
-    row-gap: 5%;
+    row-gap: 3%;
 }
 
 .fieldAndDescr {
-    width: 100%;
+    width: 90%;
     display: grid;
     justify-items: center;
-    grid-template-rows: 5% 70% 15%;
+    grid-template-rows: 5% 80% 5%;
     row-gap: 5%;
-}
-
-.nameAndChange {
-    display: grid;
-    grid-template-rows: 50% 50%;
-    justify-items: center;
-    align-items: center;
 }
 
 .forImg {
     display: grid;
+    justify-self: center;
     align-self: end;
-}
-
-.fieldAndRepeat {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 90% 10%;
-    justify-self: right;
+    width: 10%;
 }
 
 
 .field {
     width: 70%;
     display: grid;
-    grid-template-columns: 90% 10%;
-    justify-items: right;
+    justify-items: center;
+    align-items: center;
+}
+.field section {
+    display: grid;
+    justify-self: center;
 }
 
 .table {
+    height: 100%;
     aspect-ratio: 1/1;
     border-collapse: collapse;
-    width: 90%;
+}
+
+.table thead td {
+    text-align: center;
 }
 
 .td {
-    display: table-cell;
     border: 1px solid rgba(53, 72, 132, 1);
+    width: 10%;
 }
 
 .buttonChangePlayer {
-    height: 80%;
+    height: 100%;
+    width: 50%;
     background-color: rgba(211, 221, 255, 1);
     border: 3px solid rgba(53, 72, 132, 1);
     border-radius: 20px;
@@ -73,7 +63,60 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.main nav {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+nav button {
+    width: 70%;
+}
+
 button:disabled{
     color: rgb(156, 163, 184);
     border: 3px solid rgb(156, 163, 184);
+}
+
+@media screen and (max-height: 530px) {
+    table {
+        width: 225px;
+        height: 225px;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .arrangement {
+        width: 40%;
+        height: 90%;
+
+        border: 5px solid rgba(40, 67, 152, 0.8);
+        border-radius: 30px;
+    }
+}
+
+@media screen and (orientation: portrait)  {
+    .arrangement {
+        width: 100%;
+        height: 95%;
+    }
+    .fieldAndDescr{
+        width: 80%;
+    }
+
+    /*@media screen and (max-width: 625px) {*/
+    /*    .field {*/
+    /*        width: 100%;*/
+    /*        height: 70%;*/
+    /*    }*/
+    /*}*/
+    /*@media screen and (min-width: 701px) and (max-width: 785px) {*/
+    /*    .field {*/
+    /*        width: 70%;*/
+    /*    }*/
+    /*}*/
+    /*@media screen and (max-height: 820px) {*/
+    /*    height: 75%;*/
+    /*}*/
+
 }

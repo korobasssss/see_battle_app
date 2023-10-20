@@ -1,9 +1,9 @@
 .main {
-    width: 30%;
     padding: 1% 2% 2% 2%;
 
     display: grid;
     grid-template-rows: 5% 95%;
+
 }
 
 .cross {
@@ -17,4 +17,23 @@
 .titleDesc {
     display: grid;
     justify-items: center;
+}
+
+@media screen and (orientation: landscape) {
+    .main {
+        width: 30%;
+
+        border: 5px solid rgba(40, 67, 152, 0.8);
+        border-radius: 30px;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .main {
+        width: 80%;
+
+        display: grid;
+        grid-template-rows: 5% 95%;
+
+    }
 }

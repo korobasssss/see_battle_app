@@ -1,37 +1,22 @@
-.registration {
-    width: 35%;
-    height: 45%;
-
-}
-.main {
-    display: grid;
-    grid-template-rows: 2fr 2fr 1fr;
-    align-items: center;
-    row-gap: 5%;
-
-}
 .legendInput {
-    height: 100%;
     display: grid;
     grid-template-rows: 20% 50%;
     row-gap: 20%;
 
     width: 100%;
 }
+
 input, select {
     padding: 2%;
 
     background-color: rgba(160, 178, 234, 1);
     font-family: 'Montserrat', sans-serif;
     color: rgba(53, 72, 132, 1);
-    font-size: 0.8em;
     font-weight: 600;
-
     border-radius: 20px;
 
     display: grid;
     justify-items: center;
-
 }
 
 input:disabled{
@@ -39,4 +24,48 @@ input:disabled{
 }
 input:focus, select:focus {
     outline: 2px solid rgba(76, 103, 189, 1);
+}
+
+
+@media screen and (orientation: landscape) {
+    .registration {
+        border: 5px solid rgba(40, 67, 152, 0.8);
+        border-radius: 30px;
+
+        width: 45%;
+        height: 50%;
+    }
+    .main {
+        display: grid;
+        grid-template-rows: 2fr 2fr 1fr;
+        align-items: center;
+        row-gap: 5%;
+
+    }
+    .legendInput {
+        height: 100%;
+    }
+    input, select {
+        font-size: clamp(0.7rem, 0.9vw, 0.9rem);
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .registration {
+        width: 100%;
+        height: 75%;
+    }
+    .legendInput {
+        height: 70%;
+    }
+
+    .main {
+        display: grid;
+        grid-template-rows: 2fr 2fr 1fr;
+        align-items: center;
+        row-gap: 5%;
+    }
+    input, select {
+        font-size: clamp(0.9rem, 0.9vw, 1rem);
+    }
 }

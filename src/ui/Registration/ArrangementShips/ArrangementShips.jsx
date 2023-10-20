@@ -10,6 +10,7 @@ import {
 } from "../../../redux/constants";
 
 const rowsAndColls = Array.from(Array(10).keys()).map((num) => num);
+const headerLetters = ["A", "B", "C ","D ","E ","F ","G ","H ","I ","J",];
 
 const ArrangementShips = (props) => {
     let showButtonChangeField = () => {
@@ -41,20 +42,29 @@ const ArrangementShips = (props) => {
                             РАССТАВЬТЕ КОРАБЛИ
                             <section className={arr.field}>
                                 <table className={arr.table}>
-                                    {rowsAndColls.map((row) => (<tr> {
-                                        rowsAndColls.map((col) => (<td className={props.getTurnField[row][col] + " " + arr.td}>{}</td>))
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        {headerLetters.map((letter) => (<th>{letter}</th>))}
+                                    </tr>
+                                    </thead>
+                                    {rowsAndColls.map((row) => (<tr> <th>{rowsAndColls[row] + 1}</th> {
+                                        rowsAndColls.map((col) => ( <td className={props.getTurnField[row][col] + " " + arr.td}></td>))
                                     }</tr>))}
                                 </table>
                                 <section className={arr.forImg}>
                                     <img src={replay} onClick={repeat} className={arr.img_replay} alt={"repeat random arrangement"}/>
                                 </section>
-                            </section>
-                            <section className={arr.nameAndChange}>
-                                <p>{props.nameWhoseTurn}</p>
-                                <button disabled={showButtonChangeField()} onClick={click} className={arr.buttonChangePlayer}> СМЕНИТЬ ИГРОКА </button>
+                                <section>
+                                    <p>{props.nameWhoseTurn}</p>
+                                </section>
                             </section>
                         </section>
-                    <NavLink to={"/game"} className={reg.buttonNext} onClick={startGame}>ИГРАТЬ</NavLink>
+                    <nav>
+                        <button disabled={showButtonChangeField()} onClick={click} className={arr.buttonChangePlayer}> СМЕНИТЬ ИГРОКА </button>
+                        <NavLink to={"/game"} className={reg.buttonNext} onClick={startGame}>ИГРАТЬ</NavLink>
+                    </nav>
+
                 </section>
             </section>
         </section>

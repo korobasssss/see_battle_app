@@ -1,7 +1,7 @@
 .header {
     display: grid;
     justify-self: center;
-    width: 80%;
+    width: 85%;
 }
 
 .main {
@@ -9,13 +9,11 @@
     grid-template-rows: 10% 85%;
     row-gap: 10%;
 
-    width: 85%;
     padding: 3% 0 3% 0;
 }
 
 .information {
-    border: 5px solid rgba(40, 67, 152, 0.8);
-    border-radius: 30px;
+
 
     display: grid;
     justify-items: center;
@@ -29,4 +27,17 @@
 
     text-decoration: none;
 }
+
+@media screen and (orientation: landscape) {
+    .main {
+        width: 80%;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .main {
+        width: 90%;
+    }
+}
+
 
