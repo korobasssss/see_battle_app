@@ -16,6 +16,7 @@ const SetNameAndChooseGame = (props) => {
 
     let setName = (event) => {
         props.dispatch(setPlayerNameActionCreator(event))
+        console.log(props.getPlayerName)
     }
 
     const setGameType = (event) => {

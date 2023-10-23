@@ -257,6 +257,7 @@ const gameReducer = (state = initialState, action) => {
                 }
                 getUIField()
 
+
             }
             return state
         }
